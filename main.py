@@ -1,13 +1,17 @@
 import time
+import requests
+
 
 from selenium import webdriver
 
-url = "https://hadshon.edu.gov.il/"
+url = "https://hadshon.edu.gov.il/wp-content/uploads/2020/09/%D7%9E%D7%93324%D7%A6.mp3?_=1"
 
-options = webdriver.ChromeOptions()
-options.add_argument('ignore-certificate-errors')
+path = "/Users/Harry/test/test.mp3"
 
-driver = webdriver.Chrome(chrome_options=options)
-driver.get(url)
-time.sleep(5)
-print(driver.title)
+#time.sleep(5)
+
+r = requests.get(url, verify=False)
+
+f = open(path, "wb")
+f.write(r.content)
+print(r)
