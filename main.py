@@ -1,17 +1,36 @@
-import time
-import requests
+from datetime import date
+from requests_html import HTMLSession
 
+session= HTMLSession()
 
-from selenium import webdriver
+def getFormattedDateToday():
+    return str(date.today()).replace("-","_")
 
-url = "https://hadshon.edu.gov.il/wp-content/uploads/2020/09/%D7%9E%D7%93324%D7%A6.mp3?_=1"
+def getUrl():
+    r = session.get("https://hadshon.edu.gov.il/", verify = False)
+    r.html.render()
 
-path = "/Users/Harry/test/test.mp3"
+    mediaElement = r.html.xpath('//*[@id="mep_0"]/div/div[1]')
 
-#time.sleep(5)
+    urlString = str(mediaElement[0].absolute_links)
 
-r = requests.get(url, verify=False)
+    urlString = urlString.replace("{'","")
+    urlString = urlString.replace("'}","")
+    
+    return urlString
+    
+def saveFile(url, filename):
+    r = session.get(url, verify = False)
 
-f = open(path, "wb")
-f.write(r.content)
-print(r)
+    path = "/Users/Harry/dev/news/hadshon/"+filename+".mp3"
+
+    f = open(path, "wb")
+    f.write(r.content)
+    f.close()
+
+if __name__ == "__main__":
+    dateToday = getFormattedDateToday()
+
+    url = getUrl()
+    saveFile(url, dateToday)
+    
