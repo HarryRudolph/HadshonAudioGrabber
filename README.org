@@ -11,6 +11,6 @@ export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 Should silence it so that you do not get new mail everytime you run the funciton as a cron job.
 
 ** Requirements
-python3
-requests-html
-pyppeteer
+- python3
+- requests-html
+- pyppeteer
