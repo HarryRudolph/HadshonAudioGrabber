@@ -2,13 +2,6 @@
 Grabs the daily audio from [[https://hadshon.edu.gov.il/][hadshon]], a news site in simple Hebrew ran by the Israeli Ministry of Education.
 ** Usage
 Run as a cron job daily to download the news for each day to listen as you please. I use it for language immersion.
-** Silence
-#+BEGIN_src sh
-
-export PYTHONWARNINGS="ignore:Unverified HTTPS request" 
-
-#+END_src
-Should silence it so that you do not get new mail everytime you run the funciton as a cron job.
 
 ** Requirements
 - python3
